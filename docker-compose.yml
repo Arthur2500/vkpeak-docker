@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  vkpeak:
+    build: .
+    image: vkpeak:latest
+    container_name: vkpeak
+    devices:
+      # GPU passthrough for Vulkan
+      - /dev/dri:/dev/dri
+    volumes:
+      # Mount host Vulkan ICD files
+      - /etc/vulkan:/etc/vulkan:ro
+      - /usr/share/vulkan:/usr/share/vulkan:ro
+    environment:
+      # Vulkan environment variables
+      - VK_ICD_FILENAMES=/etc/vulkan/icd.d/nvidia_icd.json
+      - DISPLAY=${DISPLAY}
+    # Remove privileged mode for better security, use specific capabilities instead
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - apparmor=unconfined
