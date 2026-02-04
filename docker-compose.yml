@@ -1,0 +1,19 @@
+services:
+  vkpeak:
+    build: .
+    image: vkpeak:latest
+    container_name: vkpeak
+    devices:
+      # GPU passthrough for Vulkan
+      - /dev/dri:/dev/dri
+    volumes:
+      # Mount host Vulkan ICD files
+      - /etc/vulkan:/etc/vulkan:ro
+      - /usr/share/vulkan:/usr/share/vulkan:ro
+    environment:
+      # Vulkan environment variables (set VK_ICD_FILENAMES based on your GPU driver)
+      # For NVIDIA: /etc/vulkan/icd.d/nvidia_icd.json
+      # For AMD: /etc/vulkan/icd.d/radeon_icd.x86_64.json
+      # For Intel: /etc/vulkan/icd.d/intel_icd.x86_64.json
+      - VK_ICD_FILENAMES=${VK_ICD_FILENAMES:-}
+      - DISPLAY=${DISPLAY:-}
