@@ -22,7 +22,7 @@ RUN git submodule update --init --recursive
 # Build vkpeak with CMake
 RUN mkdir build && cd build && \
     cmake .. && \
-    cmake --build . -j 4
+    cmake --build . -j $(nproc)
 
 # Set the entrypoint to the built binary
 WORKDIR /app/vkpeak/build

@@ -17,8 +17,3 @@ services:
       # For Intel: /etc/vulkan/icd.d/intel_icd.x86_64.json
       - VK_ICD_FILENAMES=${VK_ICD_FILENAMES:-}
       - DISPLAY=${DISPLAY:-}
-    # Remove privileged mode for better security, use specific capabilities instead
-    cap_add:
-      - SYS_ADMIN
-    security_opt:
-      - apparmor=unconfined
