@@ -22,13 +22,26 @@ Dockerized version of [vkpeak](https://github.com/nihui/vkpeak) - a Vulkan compu
 Build and run vkpeak with GPU passthrough:
 
 ```bash
+docker compose up --build
+```
+
+Or if using older docker-compose command:
+
+```bash
 docker-compose up --build
 ```
 
-Or run without rebuilding:
+Run without rebuilding:
 
 ```bash
-docker-compose up
+docker compose up
+```
+
+To run in detached mode and view logs:
+
+```bash
+docker compose up -d
+docker compose logs -f
 ```
 
 ### Using Docker directly
